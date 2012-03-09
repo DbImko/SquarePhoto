@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">SquarePhoto</string>
+    <string name="login_button">Login</string>
+    <string name="popular_title">Popular</string>
+    <string name="loading_label">Loading...</string>
+    <string name="update_string">Update</string>
+    <string name="redirecting_html"><h1>Redirecting</h1></string>
+    <string name="unknown_error_html"><h1>Unknown error</h1></string>
+    <string name="access_denie_html"><h1>Access denied</h1></string>
+    
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent" android:background="#c0c0c0">
+
+	<GridView android:id="@+id/gridview" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:columnWidth="60dp"
+		android:numColumns="auto_fit" android:verticalSpacing="4dp"
+		android:horizontalSpacing="4dp" android:stretchMode="spacingWidthUniform"
+		android:gravity="center" android:listSelector="@drawable/tweet_view_selector"
+		android:layout_margin="4dp" />
+	<ProgressBar android:id="@+id/updateIndicator"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+		android:layout_margin="4dp" />
+</RelativeLayout>

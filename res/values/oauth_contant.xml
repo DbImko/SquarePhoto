@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   	<string name="client_id">0d61b53d860145ceb22b4830b9905eb7</string>
+   	<string name="client_secret">0cd8b6c0f6814abfa16917acb3b2ce1d</string>
+   	<string name="callback">http://InstagramAppExample</string>
+   	<string name="scope">basic+comments+relationships+likes</string>
+</resources>
