@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 
 import com.danikula.aibolit.Aibolit;
@@ -30,6 +31,10 @@ public class LoginActivity extends BaseActivity {
 	private static final String TAG = LoginActivity.class.getName();
 
 	private static final String ERROR_KEY = "error";
+
+	private static final String ERROR_TYPE_KEY = "error_type";
+
+	private static final String ERROR_MESSAGE_KEY = "error_message";
 
 	private ProgressDialog mLoadingDialog;
 
@@ -89,6 +94,7 @@ public class LoginActivity extends BaseActivity {
 		mWebView.setWebViewClient(webClient);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.getSettings().setSavePassword(false);
+		CookieManager.getInstance().removeAllCookie();
 	}
 
 	private void authHandler(Map<String, String> values) {
@@ -100,16 +106,26 @@ public class LoginActivity extends BaseActivity {
 		} else if (error.equals("access_denied")) {
 			// handling user access denied
 			loadHtml(R.string.access_denie_html);
-		} else {
-			// handling other situation
-			loadHtml(R.string.unknown_error_html);
+		} else if (error != null) {
+			if (values.containsKey(ERROR_MESSAGE_KEY)) {
+				loadHtml(values.get(ERROR_MESSAGE_KEY));
+			} else {
+				// handling other situation
+				loadHtml(R.string.unknown_error_html);
+			}
 		}
 	}
 
 	private String checkError(Map<String, String> values) {
+		String result = null;
 		String error = values.containsKey(ERROR_KEY) ? values.get(ERROR_KEY)
 				: null;
-		return error;
+		String error_type = values.containsKey(ERROR_TYPE_KEY) ? values
+				.get(ERROR_TYPE_KEY) : null;
+		if (error != null || error_type != null) {
+			result = error != null ? error : error_type;
+		}
+		return result;
 	}
 
 	private OAuthRequesterForAccessTokenTask createTask() {
@@ -124,7 +140,12 @@ public class LoginActivity extends BaseActivity {
 					intent.putExtra(PopularActivity.EXTRA_FIRST_TIME, true);
 					startActivity(intent);
 				} else {
-					loadHtml(R.string.unknown_error_html);
+					String errorMessage = result.getErrorMessage();
+					if (errorMessage != null) {
+						loadHtml(errorMessage);
+					} else {
+						loadHtml(R.string.unknown_error_html);
+					}
 				}
 				dismissLoading();
 			}

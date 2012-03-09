@@ -56,6 +56,7 @@ public class ImageLoader {
 	}
 
 	private class Downloader implements Runnable {
+		@Override
 		public void run() {
 			synchronized (this) {
 				while (mQueue.size() > 0) {

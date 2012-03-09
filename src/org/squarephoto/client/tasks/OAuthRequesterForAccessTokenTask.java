@@ -59,7 +59,7 @@ public abstract class OAuthRequesterForAccessTokenTask extends
 		httpParams.put(OAuthConstant.CODE, code);
 		try {
 			String accessToken = sendGetRequest(httpParams);
-			Log.e(TAG, "TOKEN " + accessToken);
+			Log.d(TAG, "TOKEN " + accessToken);
 			result = mGson.fromJson(accessToken, AuthRespModel.class);
 		} catch (Exception e) {
 			Log.e(TAG, "", e);
